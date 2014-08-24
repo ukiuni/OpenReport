@@ -39,11 +39,11 @@ myApp.controller("myPageController", [ "$rootScope", "$scope", "$http", "$locati
 	$scope.editProfile = function() {
 		$location.path('/editProfile');
 	}
-	$scope.showReport = function(reportKey) {
+	$scope.editReport = function(reportKey) {
 		$location.search('key', reportKey);
 		$location.path('/editReport');
 	}
-	$scope.showPublishedReport = function(report, $event) {
+	$scope.showReport = function(report, $event) {
 		for ( var i in $location.search()) {
 			$location.search(i, null);
 		}

@@ -5,6 +5,8 @@ myApp.controller("reportController", [ "$rootScope", "$scope", "$http", "$locati
 	var reportLoadAccessKey = null;
 	if ($rootScope.loginAccount) {
 		reportLoadAccessKey = $rootScope.loginAccount.accessKey;
+	} else if ($rootScope.cookieAccessKey) {
+		reportLoadAccessKey = $rootScope.cookieAccessKey;
 	}
 	$http.get("api/report/load/" + $location.search()["key"], {
 		params : {

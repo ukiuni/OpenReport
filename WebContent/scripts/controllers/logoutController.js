@@ -1,4 +1,5 @@
 myApp.controller("logoutController", [ "$rootScope", "$location", "$cookies", function($rootScope, $location, $cookies) {
+	$rootScope.cookieAccessKey = null;
 	$rootScope.loginAccount = null;
 	var past = new Date();
 	past.setTime(0);

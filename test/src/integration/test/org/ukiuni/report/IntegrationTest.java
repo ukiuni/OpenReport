@@ -344,7 +344,7 @@ public class IntegrationTest {
 
 		titleInput.sendKeys(newTitle);
 		contentArea.sendKeys(myContent);
-		waitForElementByClassNameAndValue("btn", "save as draft");
+		waitForElementByClassNameAndValue("btn", "save as private");
 		driver.findElement(By.id("setActionButton")).click();
 		waitForElementById("setDraftButton");
 		driver.findElement(By.id("doActionButton")).click();
@@ -359,7 +359,7 @@ public class IntegrationTest {
 	@Test
 	public void testFold() {
 		driver.get(url());
-		login("myName", "myPassword");
+		login("myName3", "myPassword");
 		waitForMyPage();
 
 		driver.get(url("report?key=e8fea4ff-e624-40b1-bf9d-357cead00f82"));
@@ -368,11 +368,10 @@ public class IntegrationTest {
 		waitForElementByClassNameAndValue("btn", "Fold");
 		for (WebElement btn : driver.findElements(By.className("btn"))) {
 			if ("Fold".equals(btn.getText())) {
-				//loop for not change to unfold. reason unknown.
 				btn.click();
+				break;
 			}
 		}
-		waitForElementByClassNameAndValue("btn", "Unfold");
 
 		waitForElementByClassNameAndValue("btn", "Unfold");
 		for (WebElement btn : driver.findElements(By.className("btn"))) {
@@ -389,12 +388,32 @@ public class IntegrationTest {
 		driver.get(url("report?key=b564857c-b762-4eaf-a95e-299fa41e25b9"));
 		waitForContentPage();
 	}
+	
+	@Test
+	public void testCantShowPrivateReportWithNotLogin() {
+		driver.get(url("report?key=11f603e9-22cf-45f8-8d48-03365fa8619a"));
+		waitForTopPage();
+		assertTrue(driver.findElement(By.id("alert")).isDisplayed());
+		assertFalse(driver.findElement(By.id("alert")).getText().isEmpty());
+	}
+	
+	@Test
+	public void testShowPrivateReportWithLogin() {
+		driver.get(url());
+		login("myName2", "myPassword");
+		waitForMyPage();
+		driver.get(url("report?key=11f603e9-22cf-45f8-8d48-03365fa8619a"));
+		waitForContentPage();
+		sleep(1000);
+		assertFalse(driver.findElement(By.id("alert")).isDisplayed());
+	}
 
 	@Test
 	public void testFoldStartsWithNotLogin() {
 		driver.get(url("report?key=b564857c-b762-4eaf-a95e-299fa41e25b9"));
 		waitForContentPage();
-
+		
+		sleep(1000);
 		for (WebElement btn : driver.findElements(By.className("btn"))) {
 			if ("Fold".equals(btn.getText())) {
 				//loop for case not change unfold reason unknown.
@@ -503,7 +522,7 @@ public class IntegrationTest {
 	@Test
 	public void testFollow() {
 		driver.get(url());
-		login("myName", "myPassword");
+		login("myName3", "myPassword");
 		waitForMyPage();
 
 		driver.get(url("report?key=e8fea4ff-e624-40b1-bf9d-357cead00f82"));

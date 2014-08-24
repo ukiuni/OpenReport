@@ -29,13 +29,13 @@
 					<button type="button" class="btn btn-primary" ng-click="createReport()">Create New Report</button>
 				</div>
 			</div>
-			<div class="row clickable reportRow" ng-click="showReport(report.key)" ng-repeat="report in reports" style="border-bottom: solid 1px #CCC">
+			<div class="row clickable reportRow" ng-click="editReport(report.key)" ng-repeat="report in reports" style="border-bottom: solid 1px #CCC">
 				<div class="col-xs-8">
 					<h4>{{report.title}}</h4>
 				</div>
 				<div class="col-xs-2">{{report.createdAt | date:"yyyy/MM/dd"}}</div>
 				<div class="col-xs-2" ng-switch on="report.status">
-					<span class="animate-switch label label-primary" ng-switch-when="published" ng-click="showPublishedReport(report, $event)">published</span> <span class="animate-switch label label-default" ng-switch-when="draft">Draft</span> <span class="animate-switch label label-default" ng-switch-when="private">Private</span> <span class="animate-switch label label-default" ng-switch-default>Draft</span>
+					<span class="animate-switch label label-primary" ng-switch-when="published" ng-click="showReport(report, $event)">published</span> <span class="animate-switch label label-default" ng-switch-when="private" ng-click="showReport(report, $event)">Private</span> <span class="animate-switch label label-default" ng-switch-when="draft">Draft</span> <span class="animate-switch label label-default" ng-switch-default>Draft</span>
 				</div>
 			</div>
 			</tab> <tab heading="News" id="newsTabHeader">

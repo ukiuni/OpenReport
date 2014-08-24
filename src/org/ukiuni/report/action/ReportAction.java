@@ -96,14 +96,14 @@ public class ReportAction {
 			account = accountService.findByAccessKey(accessKey);
 		}
 		if (!Report.STATUS_PUBLISHED.equals(report.getStatus())) {
-			System.out.println("account key = " + accessKey);
 			if (null == accessKey) {
 				throw new ForbiddenException("this report not accessible");
 			}
 			if (null == account) {
 				throw new NotFoundException("account not found");
+			} else if (Report.STATUS_PRIVATE.equals(report.getStatus())) {
+				//Accessible
 			} else if (report.getAccount().getId() != account.getId()) {
-				System.out.println("id compare = " + report.getAccount().getId() + ":" + account.getId());
 				throw new ForbiddenException("this report not accessible");
 			}
 		}
@@ -260,7 +260,7 @@ public class ReportAction {
 	@Path("/registImage")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.TEXT_PLAIN)
-	public String regist(@FormDataParam("file") InputStream file, @FormDataParam("file") FormDataContentDisposition fileDisposition, @FormDataParam("accountAccessKey") String accountAccessKey, @FormDataParam("reportKey") String reportKey) throws IOException {
+	public String registImage(@FormDataParam("file") InputStream file, @FormDataParam("file") FormDataContentDisposition fileDisposition, @FormDataParam("accountAccessKey") String accountAccessKey, @FormDataParam("reportKey") String reportKey) throws IOException {
 		if (fileDisposition.getSize() > IMAGE_SOURCE_MAX_SIZE) {
 			throw new BadRequestException("image is too large");
 		}

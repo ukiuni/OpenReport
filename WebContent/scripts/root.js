@@ -49,6 +49,9 @@ myApp.run([ "$rootScope", "$http", "$cookies", "$location", "$timeout", function
 		}, useTime);
 	}
 	var accountAccessKey = $cookies.accountAccessKey;
+	if (accountAccessKey) {
+		$rootScope.cookieAccessKey = accountAccessKey;
+	}
 	$rootScope.logout = function() {
 		$location.path('/logout');
 	}
