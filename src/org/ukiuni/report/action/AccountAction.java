@@ -78,13 +78,13 @@ public class AccountAction {
 	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public AccountDto login(AccountDetailDto saveAccount) throws IllegalAccessException, InvocationTargetException, NoSuchAlgorithmException, UnsupportedEncodingException {
+	public AccountDetailDto login(AccountDetailDto saveAccount) throws IllegalAccessException, InvocationTargetException, NoSuchAlgorithmException, UnsupportedEncodingException {
 		Account account = accountService.findByName(saveAccount.getName());
 		if (null == account || !account.getPasswordHashed().equals(Base64.encode(MessageDigest.getInstance("SHA1").digest(saveAccount.getPassword().getBytes("UTF-8"))))) {
 			throw new ResponseServerStatusException(400, "name or password not match");
 		}
 		AccountAccessKey accountAccessKey = accountService.generateAccessKey(account);
-		AccountDto returnAccount = new AccountDto();
+		AccountDetailDto returnAccount = new AccountDetailDto();
 		BeanUtils.copyProperties(returnAccount, account);
 		returnAccount.setAccessKey(accountAccessKey.getHash());
 		return returnAccount;
@@ -93,12 +93,12 @@ public class AccountAction {
 	@GET
 	@Path("loadByAccessKey")
 	@Produces(MediaType.APPLICATION_JSON)
-	public AccountDto loadByAccessKey(@QueryParam("accessKey") String accessKey) throws IllegalAccessException, InvocationTargetException {
+	public AccountDetailDto loadByAccessKey(@QueryParam("accessKey") String accessKey) throws IllegalAccessException, InvocationTargetException {
 		Account account = accountService.findByAccessKey(accessKey);
 		if (account == null) {
 			throw new NotFoundException("account not found");
 		}
-		AccountDto returnAccount = new AccountDto();
+		AccountDetailDto returnAccount = new AccountDetailDto();
 		BeanUtils.copyProperties(returnAccount, account);
 		returnAccount.setAccessKey(accessKey);
 		return returnAccount;

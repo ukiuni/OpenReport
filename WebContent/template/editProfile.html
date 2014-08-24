@@ -4,16 +4,26 @@
 			<div class="row">
 				<form role="form" name="editProfileForm">
 					<div class="form-group">
-						<label for="inputLoginName">Name</label> <input type="text" class="form-control" id="inputLoginName" ng-model="editingAccount.name" placeholder="Enter Login Name">
+						<label for="inputLoginName">Name</label> <input type="text" class="form-control" id="inputLoginName" ng-model="editingAccount.name" placeholder="Enter Login Name" ng-model-options="{ updateOn: 'blur' }" ng-minlength="4" ng-maxlength="30" name="name">
+					</div>
+					<div class="text-danger" style="min-height: 10px">
+						<span ng-show="editProfileForm.name.$error.minlength || editProfileForm.name.$error.maxlength">name must be 4-30</span>
 					</div>
 					<div class="form-group">
 						<label for="inputPassword">Password</label> <input type="password" class="form-control" id="inputPassword" ng-model="editingAccount.password" placeholder="Enter Password">
 					</div>
+					<div class="text-danger" style="min-height: 10px">
+					</div>
 					<div class="form-group">
-						<label for="inputEmail">Email</label> <input type="email" class="form-control" id="inputEmail" ng-model="editingAccount.mail" placeholder="Enter Email">
+						<label for="inputEmail">mail</label> <input type="email" class="form-control" id="inputEmail" ng-model="editingAccount.mail" placeholder="Enter Email" name="mail">
+					</div>
+					<div class="text-danger" style="min-height: 10px">
+						<span ng-show="editProfileForm.mail.$error.email">input mail address</span>
 					</div>
 					<div class="form-group">
 						<label for="inputFullName">Full Name</label> <input type="text" class="form-control" id="inputFullName" ng-model="editingAccount.fullName" placeholder="Enter Full Name">
+					</div>
+					<div class="text-danger" style="min-height: 10px">
 					</div>
 					<div class="row">
 						<div class="col-xs-3">
