@@ -8,7 +8,7 @@
 		<properties>
 			<property name="eclipselink.canonicalmodel.subpackage" value="production" />
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:file:./db/CMS.db" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:file:~/.openreport/db/openReport.db" />
 			<property name="javax.persistence.jdbc.user" value="test" />
 			<property name="javax.persistence.jdbc.password" value="test" />
 
@@ -63,7 +63,7 @@
 		<properties>
 			<property name="eclipselink.canonicalmodel.subpackage" value="cloudbees" />
 			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:h2:file:~/cms.db" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:h2:file:~/openReport.db" />
 			<property name="javax.persistence.jdbc.user" value="test" />
 			<property name="javax.persistence.jdbc.password" value="test" />
 
